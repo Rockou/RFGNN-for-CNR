@@ -1,9 +1,9 @@
 import numpy as np
 import matplotlib
 matplotlib.use('TkAgg')
-import matplotlib.pyplot as plt # 导入 Matplotlib 工具包
-import networkx as nx  # 导入 NetworkX 工具包
-from networkx.algorithms.flow import edmonds_karp  # 导入 edmonds_karp 算法函数
+import matplotlib.pyplot as plt 
+import networkx as nx  
+from networkx.algorithms.flow import edmonds_karp 
 import torch
 from torch_geometric.data import Data
 from torch_geometric.loader import DataLoader
@@ -130,7 +130,8 @@ for i in range(U):
     Rxx_predict_max[i] = np.max(Rxx_predict[i, :])
     Rxx_predict_mean[i] = np.mean(Rxx_predict[i, :])
 
-    Stop[i] = (Rxx_predict_max[i] - Rxx_predict_min[i]) / (1 - Rxx_predict_mean[i])
+    # Stop[i] = (Rxx_predict_max[i] - Rxx_predict_min[i]) / (1 - Rxx_predict_mean[i])
+    Stop[i] = (Rxx_predict_max[i] - Rxx_predict_min[i]) / np.min([Rxx_predict_mean[i], 1 - Rxx_predict_mean[i]])
     if Stop[i] <= Stop0:
         break
     print("Number of Iteration:", i)
